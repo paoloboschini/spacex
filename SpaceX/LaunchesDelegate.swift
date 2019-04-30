@@ -10,12 +10,8 @@ import UIKit
 
 class LaunchesDelegate: NSObject, UITableViewDelegate, UITableViewDataSource {
     
-    private var launches: [Launch] = []
-    
-    init(launches: [Launch]) {
-        self.launches = launches
-    }
-    
+    var launches: [Launch] = []
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
