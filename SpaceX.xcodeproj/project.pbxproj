@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		874949E22278342300EB7FDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874949E12278342300EB7FDB /* AppDelegate.swift */; };
-		874949E42278342300EB7FDB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874949E32278342300EB7FDB /* ViewController.swift */; };
+		874949E42278342300EB7FDB /* LaunchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874949E32278342300EB7FDB /* LaunchesViewController.swift */; };
 		874949E72278342300EB7FDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 874949E52278342300EB7FDB /* Main.storyboard */; };
 		874949E92278342500EB7FDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 874949E82278342500EB7FDB /* Assets.xcassets */; };
 		874949EC2278342500EB7FDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 874949EA2278342500EB7FDB /* LaunchScreen.storyboard */; };
 		874949F72278342500EB7FDB /* SpaceXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874949F62278342500EB7FDB /* SpaceXTests.swift */; };
 		87494A022278342500EB7FDB /* SpaceXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87494A012278342500EB7FDB /* SpaceXUITests.swift */; };
+		87494A1022783C2B00EB7FDB /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87494A0F22783C2B00EB7FDB /* Launch.swift */; };
+		87494A1222783C4D00EB7FDB /* LaunchesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87494A1122783C4D00EB7FDB /* LaunchesDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +38,7 @@
 /* Begin PBXFileReference section */
 		874949DE2278342300EB7FDB /* SpaceX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		874949E12278342300EB7FDB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		874949E32278342300EB7FDB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		874949E32278342300EB7FDB /* LaunchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesViewController.swift; sourceTree = "<group>"; };
 		874949E62278342300EB7FDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		874949E82278342500EB7FDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		874949EB2278342500EB7FDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +49,8 @@
 		874949FD2278342500EB7FDB /* SpaceXUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceXUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		87494A012278342500EB7FDB /* SpaceXUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXUITests.swift; sourceTree = "<group>"; };
 		87494A032278342500EB7FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87494A0F22783C2B00EB7FDB /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch.swift; sourceTree = "<group>"; };
+		87494A1122783C4D00EB7FDB /* LaunchesDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,11 +102,13 @@
 			isa = PBXGroup;
 			children = (
 				874949E12278342300EB7FDB /* AppDelegate.swift */,
-				874949E32278342300EB7FDB /* ViewController.swift */,
-				874949E52278342300EB7FDB /* Main.storyboard */,
 				874949E82278342500EB7FDB /* Assets.xcassets */,
-				874949EA2278342500EB7FDB /* LaunchScreen.storyboard */,
 				874949ED2278342500EB7FDB /* Info.plist */,
+				87494A0F22783C2B00EB7FDB /* Launch.swift */,
+				87494A1122783C4D00EB7FDB /* LaunchesDelegate.swift */,
+				874949E32278342300EB7FDB /* LaunchesViewController.swift */,
+				874949EA2278342500EB7FDB /* LaunchScreen.storyboard */,
+				874949E52278342300EB7FDB /* Main.storyboard */,
 			);
 			path = SpaceX;
 			sourceTree = "<group>";
@@ -256,8 +262,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				874949E42278342300EB7FDB /* ViewController.swift in Sources */,
+				874949E42278342300EB7FDB /* LaunchesViewController.swift in Sources */,
+				87494A1022783C2B00EB7FDB /* Launch.swift in Sources */,
 				874949E22278342300EB7FDB /* AppDelegate.swift in Sources */,
+				87494A1222783C4D00EB7FDB /* LaunchesDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
