@@ -10,7 +10,8 @@ import Foundation
 
 class LaunchService {
 
-    var numberOfLoadedLaunches = 0
+    private var numberOfLoadedLaunches = 0
+    private var launchesToLoadPerRequest = 20
     private var task: URLSessionDataTask?
     
     // https://gist.github.com/cmoulton/7ddc3cfabda1facb040a533f637e74b8
@@ -21,7 +22,7 @@ class LaunchService {
         }
         
         // Set up the URL request
-        let endpoint: String = "https://api.spacexdata.com/v3/launches?limit=20&offset=\(self.numberOfLoadedLaunches)&order=desc"
+        let endpoint = "https://api.spacexdata.com/v3/launches?limit=\(self.launchesToLoadPerRequest)&offset=\(self.numberOfLoadedLaunches)&order=desc"
         guard let url = URL(string: endpoint) else {
             onFail("Error: cannot create URL")
             return
