@@ -9,12 +9,19 @@
 import Foundation
 
 class LaunchService {
+
+    var numberOfLoadedLaunches = 0
+    private var task: URLSessionDataTask?
     
     // https://gist.github.com/cmoulton/7ddc3cfabda1facb040a533f637e74b8
     func getLaunches(onSuccess: @escaping ([Launch]) -> (), onFail: @escaping (String) -> ()) {
 
+        if self.task?.state == URLSessionTask.State.running {
+            return
+        }
+        
         // Set up the URL request
-        let endpoint: String = "https://api.spacexdata.com/v3/launches?limit=20"
+        let endpoint: String = "https://api.spacexdata.com/v3/launches?limit=20&offset=\(self.numberOfLoadedLaunches)&order=desc"
         guard let url = URL(string: endpoint) else {
             onFail("Error: cannot create URL")
             return
@@ -26,7 +33,7 @@ class LaunchService {
         let session = URLSession(configuration: config)
         
         // make the request
-        let task = session.dataTask(with: urlRequest) { (data, response, error) in
+        self.task = session.dataTask(with: urlRequest) { (data, response, error) in
             
             // check for any errors
             if let error = error {
@@ -56,6 +63,7 @@ class LaunchService {
                     }
                 }
                 
+                self.numberOfLoadedLaunches += launchList.count
                 onSuccess(launchList)
                 
             } catch  {
@@ -63,6 +71,6 @@ class LaunchService {
                 return
             }
         }
-        task.resume()
+        self.task?.resume()
     }
 }

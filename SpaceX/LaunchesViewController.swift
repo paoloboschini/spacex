@@ -15,10 +15,19 @@ class LaunchesViewController: UIViewController {
     @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
     var launchesDelegate: LaunchesDelegate?
     let launchService = LaunchService()
+//    var loadingLaunches = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.launchesDelegate = LaunchesDelegate()
+        self.launchesDelegate = LaunchesDelegate(onLoadMoreTapped: {
+            if let cell = self.tableView.visibleCells.last {
+                cell.textLabel?.text = "Loading..."
+                UIView.animate(withDuration: 0.6, delay: 0, options: [.repeat, .autoreverse], animations: {
+                    cell.textLabel?.alpha = 0
+                }, completion: nil)
+            }
+            self.getData()
+        })
         self.tableView.delegate = self.launchesDelegate
         self.tableView.dataSource = self.launchesDelegate
     }
@@ -34,18 +43,27 @@ class LaunchesViewController: UIViewController {
             self.loadingLabel.alpha = 0
         }, completion: nil)
 
-        // Get data and update UI
+        // Get data
+        self.getData()
+    }
+    
+    private func getData() {
+//        if self.loadingLaunches {
+//            return
+//        }
+//        self.loadingLaunches = true
         self.launchService.getLaunches(onSuccess: { launches in
             print(launches)
-            self.launchesDelegate?.launches = launches
+            self.launchesDelegate?.launches += launches
             self.updateUIOnCompletion()
         }) { error in
             self.updateUIOnCompletion(error: error)
         }
     }
-    
+
     private func updateUIOnCompletion(error: String? = nil) {
         DispatchQueue.main.async(execute: {
+//            self.loadingLaunches = false
             self.activityIndicatorView.stopAnimating()
             self.loadingLabel.layer.removeAllAnimations()
             self.tableView.reloadData()
