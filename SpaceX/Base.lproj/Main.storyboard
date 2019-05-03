@@ -96,7 +96,6 @@
                         <outlet property="activityIndicatorView" destination="PMR-LE-AA9" id="AnK-Fg-cpR"/>
                         <outlet property="loadingLabel" destination="jad-oc-jLg" id="G2P-aS-XRD"/>
                         <outlet property="tableView" destination="lVg-gL-NNu" id="haS-AG-2HL"/>
-                        <outlet property="web" destination="JlY-wO-5d6" id="DnZ-uA-DPb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -142,7 +141,7 @@
                         <viewLayoutGuide key="safeArea" id="438-B9-xw0"/>
                     </view>
                     <connections>
-                        <outlet property="webView" destination="JlY-wO-5d6" id="H4u-9I-Y98"/>
+                        <outlet property="webView" destination="JlY-wO-5d6" id="f1h-y5-Wpq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dfa-Ra-uEo" userLabel="First Responder" sceneMemberID="firstResponder"/>

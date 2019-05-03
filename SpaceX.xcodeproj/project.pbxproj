@@ -18,6 +18,7 @@
 		87494A1222783C4D00EB7FDB /* LaunchesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87494A1122783C4D00EB7FDB /* LaunchesDelegate.swift */; };
 		87494A1422788CC500EB7FDB /* LaunchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87494A1322788CC500EB7FDB /* LaunchService.swift */; };
 		87494A16227B154E00EB7FDB /* LaunchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87494A15227B154E00EB7FDB /* LaunchDetailViewController.swift */; };
+		87D42093227C3AF3004FC5EA /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87D42092227C3AF3004FC5EA /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		87494A1122783C4D00EB7FDB /* LaunchesDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesDelegate.swift; sourceTree = "<group>"; };
 		87494A1322788CC500EB7FDB /* LaunchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchService.swift; sourceTree = "<group>"; };
 		87494A15227B154E00EB7FDB /* LaunchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchDetailViewController.swift; sourceTree = "<group>"; };
+		87D42092227C3AF3004FC5EA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87D42093227C3AF3004FC5EA /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +92,7 @@
 				874949F52278342500EB7FDB /* SpaceXTests */,
 				87494A002278342500EB7FDB /* SpaceXUITests */,
 				874949DF2278342300EB7FDB /* Products */,
+				87D42091227C3AF3004FC5EA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -135,6 +139,14 @@
 				87494A032278342500EB7FDB /* Info.plist */,
 			);
 			path = SpaceXUITests;
+			sourceTree = "<group>";
+		};
+		87D42091227C3AF3004FC5EA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				87D42092227C3AF3004FC5EA /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -10,11 +10,13 @@ import UIKit
 
 struct Launch: CustomStringConvertible {
     var missionName: String
-    var videoLink: String { // format video
+    var videoLink: String? { // format video
         didSet {
             // source format can be https://www.youtube.com/watch?v=0a_00nJ_Y88
             // source format can be https://youtu.be/TXMGu2d8c8g
-            self.videoLink = "https://www.youtube.com/embed/\(videoLink.suffix(11))"
+            if let videoLink = self.videoLink {
+                self.videoLink = "https://www.youtube.com/embed/\(videoLink.suffix(11))"
+            }
         }
     }
 
@@ -33,7 +35,7 @@ struct Launch: CustomStringConvertible {
         }
     }
 
-    init(missionName: String, launchDate: String, videoLink: String) {
+    init(missionName: String, launchDate: String, videoLink: String?) {
         self.missionName = missionName
         self.launchDate = launchDate
         self.videoLink = videoLink

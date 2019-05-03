@@ -15,10 +15,15 @@ class LaunchesViewController: UIViewController {
     @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
     private var isInStack = false
     var launchesDelegate: LaunchesDelegate?
+    var refreshControl = UIRefreshControl()
     let launchService = LaunchService()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        self.tableView.addSubview(refreshControl)
 
         let onLoadMoreTapped = {
             if let cell = self.tableView.visibleCells.last {
@@ -63,6 +68,16 @@ class LaunchesViewController: UIViewController {
         }
     }
 
+    // MARK: - Actions
+
+    @objc func refresh() {
+        self.launchesDelegate?.launches = []
+        self.launchService.numberOfLoadedLaunches = 0
+        self.getData()
+    }
+
+    // MARK: - Privates
+
     private func getData() {
         self.launchService.getLaunches(onSuccess: { launches in
             print(launches)
@@ -75,10 +90,10 @@ class LaunchesViewController: UIViewController {
 
     private func updateUIOnCompletion(error: String? = nil) {
         DispatchQueue.main.async(execute: {
-//            self.loadingLaunches = false
             self.activityIndicatorView.stopAnimating()
             self.loadingLabel.layer.removeAllAnimations()
             self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
             if let error = error {
                 self.loadingLabel.text = error
                 self.loadingLabel.alpha = 1

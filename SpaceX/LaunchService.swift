@@ -10,11 +10,10 @@ import Foundation
 
 class LaunchService {
 
-    private var numberOfLoadedLaunches = 0
+    var numberOfLoadedLaunches = 0
     private var launchesToLoadPerRequest = 20
     private var task: URLSessionDataTask?
     
-    // https://gist.github.com/cmoulton/7ddc3cfabda1facb040a533f637e74b8
     func getLaunches(onSuccess: @escaping ([Launch]) -> (), onFail: @escaping (String) -> ()) {
 
         if self.task?.state == URLSessionTask.State.running {
@@ -23,6 +22,7 @@ class LaunchService {
         
         // Set up the URL request
         let endpoint = "https://api.spacexdata.com/v3/launches?limit=\(self.launchesToLoadPerRequest)&offset=\(self.numberOfLoadedLaunches)&order=desc"
+        print("Calling \(endpoint)")
         guard let url = URL(string: endpoint) else {
             onFail("Error: cannot create URL")
             return
@@ -59,9 +59,9 @@ class LaunchService {
                 for launch in launches {
                     if  let launch = launch as? [String : Any],
                         let missionName = launch["mission_name"] as? String,
-                        let launchDate = launch["launch_date_utc"] as? String,
-                        let links = launch["links"] as? [String : Any],
-                        let videoLink = links["video_link"] as? String {
+                        let launchDate = launch["launch_date_utc"] as? String {
+                        let links = launch["links"] as? [String : Any]
+                        let videoLink = links?["video_link"] as? String
                         launchList.append(Launch(missionName: missionName, launchDate: launchDate, videoLink: videoLink))
                     }
                 }
