@@ -22,11 +22,11 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LaunchCell" textLabel="aGc-4E-Q5y" detailTextLabel="MVl-md-YvO" style="IBUITableViewCellStyleSubtitle" id="BvV-jh-8dR">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LaunchCell" textLabel="aGc-4E-Q5y" detailTextLabel="MVl-md-YvO" style="IBUITableViewCellStyleSubtitle" id="BvV-jh-8dR">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BvV-jh-8dR" id="fde-EP-5T2">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="376" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aGc-4E-Q5y">
@@ -45,6 +45,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="13T-Rd-caT" kind="show" id="zWs-x4-0Qq"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LoadMoreCell" textLabel="ba4-gC-CpK" style="IBUITableViewCellStyleDefault" id="m9h-sq-MGg">
                                         <rect key="frame" x="0.0" y="72" width="414" height="44"/>
@@ -93,11 +96,58 @@
                         <outlet property="activityIndicatorView" destination="PMR-LE-AA9" id="AnK-Fg-cpR"/>
                         <outlet property="loadingLabel" destination="jad-oc-jLg" id="G2P-aS-XRD"/>
                         <outlet property="tableView" destination="lVg-gL-NNu" id="haS-AG-2HL"/>
+                        <outlet property="web" destination="JlY-wO-5d6" id="DnZ-uA-DPb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="137.94642857142856"/>
+        </scene>
+        <!--Launch Detail View Controller-->
+        <scene sceneID="kDi-p8-Vcv">
+            <objects>
+                <viewController id="13T-Rd-caT" customClass="LaunchDetailViewController" customModule="SpaceX" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7UN-Uo-EXQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsy-iT-D3U">
+                                <rect key="frame" x="0.0" y="88" width="414" height="310.5"/>
+                                <subviews>
+                                    <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JlY-wO-5d6">
+                                        <rect key="frame" x="16" y="16" width="382" height="278.5"/>
+                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <wkWebViewConfiguration key="configuration">
+                                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                            <wkPreferences key="preferences"/>
+                                        </wkWebViewConfiguration>
+                                    </wkWebView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="JlY-wO-5d6" firstAttribute="top" secondItem="dsy-iT-D3U" secondAttribute="top" constant="16" id="3JT-Qz-Ugs"/>
+                                    <constraint firstAttribute="trailing" secondItem="JlY-wO-5d6" secondAttribute="trailing" constant="16" id="CZ4-7J-1GE"/>
+                                    <constraint firstAttribute="width" secondItem="dsy-iT-D3U" secondAttribute="height" multiplier="4:3" id="EoH-v9-pfs"/>
+                                    <constraint firstAttribute="bottom" secondItem="JlY-wO-5d6" secondAttribute="bottom" constant="16" id="npd-1M-Pc6"/>
+                                    <constraint firstItem="JlY-wO-5d6" firstAttribute="leading" secondItem="dsy-iT-D3U" secondAttribute="leading" constant="16" id="qg4-EO-sqn"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dsy-iT-D3U" firstAttribute="trailing" secondItem="438-B9-xw0" secondAttribute="trailing" id="8Nn-0H-OmG"/>
+                            <constraint firstItem="dsy-iT-D3U" firstAttribute="leading" secondItem="438-B9-xw0" secondAttribute="leading" id="FD9-rM-RsR"/>
+                            <constraint firstItem="dsy-iT-D3U" firstAttribute="top" secondItem="438-B9-xw0" secondAttribute="top" id="VM9-GU-md8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="438-B9-xw0"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="JlY-wO-5d6" id="H4u-9I-Y98"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dfa-Ra-uEo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1948" y="138"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="adf-IV-2YL">
