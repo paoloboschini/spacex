@@ -62,7 +62,12 @@ class LaunchService {
                         let launchDate = launch["launch_date_utc"] as? String {
                         let links = launch["links"] as? [String : Any]
                         let videoLink = links?["video_link"] as? String
-                        launchList.append(Launch(missionName: missionName, launchDate: launchDate, videoLink: videoLink))
+                        let rocket = launch["rocket"] as? [String : Any]
+                        let rocketName = rocket?["rocket_name"] as? String
+                        let launchSuccess = launch["launch_success"] as? Bool
+                        let flightNumber = launch["flight_number"] as? Int
+                        let details = launch["details"] as? String
+                        launchList.append(Launch(missionName: missionName, launchDate: launchDate, videoLink: videoLink, rocketName: rocketName, launchSuccess: launchSuccess, flightNumber: flightNumber, details: details))
                     }
                 }
                 

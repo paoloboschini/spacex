@@ -34,12 +34,20 @@ struct Launch: CustomStringConvertible {
             }
         }
     }
+    var rocketName: String?
+    var launchSuccess: Bool?
+    var flightNumber: Int?
+    var details: String?
 
-    init(missionName: String, launchDate: String, videoLink: String?) {
+    init(missionName: String, launchDate: String, videoLink: String?, rocketName: String?, launchSuccess: Bool?, flightNumber: Int?, details: String?) {
         self.missionName = missionName
         self.launchDate = launchDate
         self.videoLink = videoLink
-        
+        self.rocketName = rocketName
+        self.launchSuccess = launchSuccess
+        self.flightNumber = flightNumber
+        self.details = details
+
         // Creative use of defer. This allows to call didSet during initialization to format fields
         // https://stackoverflow.com/questions/25230780/is-it-possible-to-allow-didset-to-be-called-during-initialization-in-swift
         defer {
