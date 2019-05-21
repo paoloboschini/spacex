@@ -30,7 +30,7 @@ class LaunchesDelegate: NSObject, UITableViewDelegate, UITableViewDataSource {
             let cell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: "LaunchCell")
             let launch = self.launches[indexPath.row]
             cell.textLabel?.text = launch.missionName
-            cell.detailTextLabel?.text = launch.launchDate
+            cell.detailTextLabel?.text = launch.formattedLaunchDate
             return cell
         } else {
             let cell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: "LoadMoreCell")

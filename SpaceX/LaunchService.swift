@@ -10,75 +10,35 @@ import Foundation
 
 class LaunchService {
 
+    private let dataSource: DataSource
     var numberOfLoadedLaunches = 0
-    private var launchesToLoadPerRequest = 20
-    private var task: URLSessionDataTask?
-    
-    func getLaunches(onSuccess: @escaping ([Launch]) -> (), onFail: @escaping (String) -> ()) {
 
-        if self.task?.state == URLSessionTask.State.running {
-            return
-        }
-        
-        // Set up the URL request
-        let endpoint = "https://api.spacexdata.com/v3/launches?limit=\(self.launchesToLoadPerRequest)&offset=\(self.numberOfLoadedLaunches)&order=desc"
-        print("Calling \(endpoint)")
-        guard let url = URL(string: endpoint) else {
-            onFail("Error: cannot create URL")
-            return
-        }
-        
-        // set up the session
-        let urlRequest = URLRequest(url: url)
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
-        
-        // make the request
-        self.task = session.dataTask(with: urlRequest) { (data, response, error) in
-            
+    init(dataSource: DataSource) {
+        self.dataSource = dataSource
+    }
+    
+    func getLaunches(completionHandler: @escaping ([Launch], String?) -> Void) {
+        self.dataSource.getData(numberOfLoadedLaunches: numberOfLoadedLaunches) { data, error in
+
             // check for any errors
             if let error = error {
-                onFail(error.localizedDescription)
+                completionHandler([], error.localizedDescription)
                 return
             }
-            
+
             // make sure we got data
-            guard let responseData = data else {
-                onFail("Error: did not receive data")
+            guard let data = data else {
+                completionHandler([], "Error: did not receive data")
                 return
             }
             
-            // parse the result as JSON, since that's what the API provides
-            do {
-                guard let launches = try JSONSerialization.jsonObject(with: responseData, options: []) as? [Any] else {
-                    onFail("error trying to convert data to JSON")
-                    return
-                }
-                
-                var launchList: [Launch] = []
-                for launch in launches {
-                    if  let launch = launch as? [String : Any],
-                        let missionName = launch["mission_name"] as? String,
-                        let launchDate = launch["launch_date_utc"] as? String {
-                        let links = launch["links"] as? [String : Any]
-                        let videoLink = links?["video_link"] as? String
-                        let rocket = launch["rocket"] as? [String : Any]
-                        let rocketName = rocket?["rocket_name"] as? String
-                        let launchSuccess = launch["launch_success"] as? Bool
-                        let flightNumber = launch["flight_number"] as? Int
-                        let details = launch["details"] as? String
-                        launchList.append(Launch(missionName: missionName, launchDate: launchDate, videoLink: videoLink, rocketName: rocketName, launchSuccess: launchSuccess, flightNumber: flightNumber, details: details))
-                    }
-                }
-                
-                self.numberOfLoadedLaunches += launchList.count
-                onSuccess(launchList)
-                
-            } catch  {
-                onFail("error trying to convert data to JSON")
+            guard let launches = try? JSONDecoder().decode([Launch].self, from: data) else {
+                print("Error: Couldn't decode data into Launches")
                 return
             }
+
+            self.numberOfLoadedLaunches += launches.count
+            completionHandler(launches, nil)
         }
-        self.task?.resume()
     }
 }

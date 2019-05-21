@@ -23,9 +23,10 @@ class LaunchDetailViewController: UIViewController {
         let frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: (UIScreen.main.bounds.width / 4) * 3)
         self.tableView.tableHeaderView?.frame = frame
         self.tableView.tableFooterView = UIView()
-        if let videoLink = self.launch?.videoLink, let url = URL(string: videoLink) {
+        if let videoLink = self.launch?.links?.videoLink, let url = URL(string: videoLink) {
             self.noVideoFoundLabel.isHidden = true
             self.webView.load(URLRequest(url: url))
+            print("Loading video \(url)")
         }
     }
 }
@@ -45,7 +46,7 @@ extension LaunchDetailViewController: UITableViewDelegate, UITableViewDataSource
         case 0:
             let cell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: "InfoCell")
             cell.textLabel?.text = "Rocket Name"
-            cell.detailTextLabel?.text = self.launch?.rocketName
+            cell.detailTextLabel?.text = self.launch?.rocket?.rocketName
             c = cell
         case 1:
             let cell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: "InfoCell")

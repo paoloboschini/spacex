@@ -16,10 +16,13 @@ class LaunchesViewController: UIViewController {
     private var isInStack = false
     var launchesDelegate: LaunchesDelegate?
     var refreshControl = UIRefreshControl()
-    let launchService = LaunchService()
+    var launchService: LaunchService?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let dataSource = NetworkDataSource()
+        self.launchService = LaunchService(dataSource: dataSource)
 
         self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         self.refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
@@ -72,20 +75,22 @@ class LaunchesViewController: UIViewController {
 
     @objc func refresh() {
         self.launchesDelegate?.launches = []
-        self.launchService.numberOfLoadedLaunches = 0
+        self.launchService?.numberOfLoadedLaunches = 0
         self.getData()
     }
 
     // MARK: - Privates
 
     private func getData() {
-        self.launchService.getLaunches(onSuccess: { launches in
-            print(launches)
-            self.launchesDelegate?.launches += launches
-            self.updateUIOnCompletion()
-        }) { error in
-            self.updateUIOnCompletion(error: error)
-        }
+        self.launchService?.getLaunches(completionHandler: { launches, error in
+            if let error = error {
+                self.updateUIOnCompletion(error: error)
+            } else {
+                print(launches)
+                self.launchesDelegate?.launches += launches
+                self.updateUIOnCompletion()
+            }
+        })
     }
 
     private func updateUIOnCompletion(error: String? = nil) {
