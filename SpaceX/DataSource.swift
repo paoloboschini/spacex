@@ -12,6 +12,7 @@ protocol DataSource {
     func getData(numberOfLoadedLaunches: Int, completionHandler: @escaping (Data?, Error?) -> Void)
 }
 
+let SPACE_X_API = "https://api.spacexdata.com/v3/launches?limit=%d&offset=%d&order=desc"
 class NetworkDataSource: DataSource {
     
     private var launchesToLoadPerRequest = 20
@@ -23,7 +24,7 @@ class NetworkDataSource: DataSource {
         }
         
         // Set up the URL request
-        let endpoint = "https://api.spacexdata.com/v3/launches?limit=\(self.launchesToLoadPerRequest)&offset=\(numberOfLoadedLaunches)&order=desc"
+        let endpoint = String(format: SPACE_X_API, self.launchesToLoadPerRequest, numberOfLoadedLaunches)
         print("Calling \(endpoint)")
         guard let url = URL(string: endpoint) else {
             completionHandler(nil, NSError(domain: "Error: cannot create URL", code: 0, userInfo: nil))
