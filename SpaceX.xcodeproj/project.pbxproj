@@ -113,15 +113,15 @@
 			children = (
 				874949E12278342300EB7FDB /* AppDelegate.swift */,
 				874949E82278342500EB7FDB /* Assets.xcassets */,
+				8772A0022293EE4300E6CC5A /* DataSource.swift */,
 				874949ED2278342500EB7FDB /* Info.plist */,
-				87494A0F22783C2B00EB7FDB /* Models.swift */,
 				87494A15227B154E00EB7FDB /* LaunchDetailViewController.swift */,
 				87494A1122783C4D00EB7FDB /* LaunchesDelegate.swift */,
 				874949E32278342300EB7FDB /* LaunchesViewController.swift */,
 				874949EA2278342500EB7FDB /* LaunchScreen.storyboard */,
 				87494A1322788CC500EB7FDB /* LaunchService.swift */,
 				874949E52278342300EB7FDB /* Main.storyboard */,
-				8772A0022293EE4300E6CC5A /* DataSource.swift */,
+				87494A0F22783C2B00EB7FDB /* Models.swift */,
 			);
 			path = SpaceX;
 			sourceTree = "<group>";

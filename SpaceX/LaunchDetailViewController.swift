@@ -15,7 +15,6 @@ class LaunchDetailViewController: UIViewController {
     @IBOutlet var webView: WKWebView!
     @IBOutlet var noVideoFoundLabel: UILabel!
     var launch: Launch?
-    var details = ["Rocket Name", "Launch Success", "Flight Number"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
